@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "Player.h"
 #include "Computer.h"
 
