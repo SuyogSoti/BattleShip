@@ -23,10 +23,7 @@ bool compareBoard(const Player &p1, const Player &p2) {
 	return p1.myBoard == p2.myBoard;
 }
 
-Player::Player() : cruz("Cruiser", 3), destroyer("Destroyer", 2), carrier("Carrier", 5),
-				   battle("Battleship", 4), sub("Submarine", 3){
-	setName("John Doe");
-	setPlayer();
+Player::Player() : Player::Player("John Doe"){
 }
 
 void Player::setName(std::string name) {
@@ -34,7 +31,7 @@ void Player::setName(std::string name) {
 }
 
 void Player::setShipLocations() {
-	for(int i = 0; i<this->sh.size(); i++){
+	for(int i = 0; i < this->sh.size(); i++){
 		Ships *temp = &this->sh[i];
 		int x, y;
 		std::string tempCoord;
@@ -63,13 +60,14 @@ void Player::setShipLocations() {
             }
             if (tempCoord == "up") {
                 std::cout << "You entered up!" << std::endl;
-                if (x < (temp->getSize() - 1)) {
+                if (x <= (temp->getSize() - 1)) {
                     std::cout << "Your ship does not fit on the myBoard if it start at this position and goes up"
                               << std::endl;
                     std::cout << "Remeber the " << temp->getName() << " has size: " << temp->getSize() << std::endl;
                     continue;
                 }
 //                I have to do a double for loop and sacrifice efficiency so that it is not being witten as it is being checked
+// TODO: What is wrong with adding the points here? --I forget
                 for (int j = 0; j < (temp->getSize()); j++) {
                     if (this->myBoard[x - 1 - j][y - 1] == "S") {
                         redo = true;
@@ -105,7 +103,7 @@ void Player::setShipLocations() {
                 }
             } else if (tempCoord == "left") {
                 std::cout << "You entered left!" << std::endl;
-                if (y < (temp->getSize() - 1)) {
+                if (y <= (temp->getSize() - 1)) {
                     std::cout << "Your ship does not fit on the myBoard if it start at this position and goes left"
                               << std::endl;
                     std::cout << "Remeber the " << temp->getName() << " has size: " << temp->getSize() << std::endl;
